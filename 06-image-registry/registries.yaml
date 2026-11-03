@@ -1,0 +1,24 @@
+# RKE2 노드의 레지스트리 미러 설정 예시
+# 위치: /etc/rancher/rke2/registries.yaml (변경 후 rke2-server 또는 rke2-agent 재시작)
+#
+# 매니페스트에 docker.io/... 나 ghcr.io/... 가 적혀 있어도
+# containerd 가 내부 레지스트리(registry.internal)에서 먼저 받도록 돌린다.
+mirrors:
+  docker.io:
+    endpoint:
+      - "https://registry.internal"
+    rewrite:                       # Harbor 프록시 캐시 프로젝트 경로로 바꿔 요청
+      "^(.*)$": "dockerhub-proxy/$1"
+  ghcr.io:
+    endpoint:
+      - "https://registry.internal"
+    rewrite:
+      "^(.*)$": "ghcr-proxy/$1"
+
+configs:
+  "registry.internal":
+    auth:
+      username: robot-pull       # 읽기 전용 계정
+      password: "<secret>"       # 실제 값은 파일에 두지 않고 배포 도구로 주입
+    tls:
+      ca_file: /etc/ssl/certs/internal-ca.crt

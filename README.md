@@ -15,6 +15,7 @@ MLOps 표준 인프라 구축을 위한 스터디 레포지토리
 | 3 | `03-gitops-argocd/` | CD: GitOps 기반 배포 | Application, Sync, Rollback |
 | 4 | `04-artifact-minio/` | Storage: 데이터/모델 저장소 | Bucket, S3 API, Versioning |
 | 5 | `05-experiment-mlflow/` | Tracking: 실험 추적 | Experiment, Run, Model Registry |
+| 6 | `06-image-registry/` | Supply: 내부 저장소와 폐쇄망 배포 | Mirror, Proxy cache, Digest |
 
 ## 진행 방식
 
